@@ -16,29 +16,38 @@ biopython (version 1.74)
 ### Brain models:
 #### Trained on mouse sequences, flanking region negatives:
 Architecture file: brainEnhancer_flankNeg_500bp_conv5_architecture.json
+
 Weights file: brainEnhancer_flankNeg_500bp_conv5.hdf5
 #### Trained on mouse sequences, open chromatin in other tissues negatives:
 Architecture file: brainEnhancer_nonCerebrumMouseTissueNeg_500bp_conv5_architecture.json
+
 Weights file: brainEnhancer_nonCerebrumMouseTissueNeg_500bp_conv5.hdf5
 #### Trained on mouse sequences, large G/C- and repeat-matched region negatives:
 Architecture file: brainEnhancer_RandomGCRepeatLargeNeg_500bp_conv5_architecture.json
+
 Weights file: brainEnhancer_RandomGCRepeatLargeNeg_500bp_conv5.hdf5
 #### Trained on mouse sequences, small G/C- and repeat-matched region negatives:
 Architecture file: brainEnhancer_RandomGCRepeatSmallNeg_500bp_conv5_architecture.json
+
 Weights file: brainEnhancer_RandomGCRepeatSmallNeg_500bp_conv5.hdf5
 #### Trained on mouse sequences, dinucleotide-shuffled region negatives:
 Architecture file: brainEnhancer_DiShuf10XNeg_500bp_conv5_architecture.json
+
 Weights file: brainEnhancer_DiShuf10XNeg_500bp_conv5.hdf5
 #### Trained on mouse sequences, non-OCR orthologs of OCR negatives:
 Architecture file: brainEnhancer_euarchontaglireEnhLooseOrthNeg_500bp_conv5_architecture.json
+
 Weights file: brainEnhancer_euarchontaglireEnhLooseOrthNeg_500bp_conv5.hdf5
 #### Trained on sequences from multiple species, non-OCR orthologs of OCR negatives:
 Architecture file: brainEnhancer_humanMouseMacaqueRat_euarchontaglireEnhLooseOrthNeg_500bp_conv5_architecture.json
+
 Weights file: brainEnhancer_humanMouseMacaqueRat_euarchontaglireEnhLooseOrthNeg_500bp_conv5.hdf5
 ### Liver models:
 #### Trained on mouse sequences, non-OCR orthologs of OCR negatives:
 Architecture file: liverEnhancer_euarchontaglireEnhLooseOrthNeg_500bp_conv5_architecture.json
+
 Weights file: liverEnhancer_euarchontaglireEnhLooseOrthNeg_500bp_conv5.hdf5
 #### Trained on sequences from multiple species, non-OCR orthologs of OCR negatives:
 Architecture file: liverEnhancer_mouseMacaqueRat_euarchontaglireEnhLooseOrthNeg_500bp_conv5_architecture.json
+
 Weights file: liverEnhancer_mouseMacaqueRat_euarchontaglireEnhLooseOrthNeg_500bp_conv5.hdf5
