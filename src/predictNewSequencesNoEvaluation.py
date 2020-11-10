@@ -42,6 +42,9 @@ def parseArgument():
 			necessary if input is in narrowPeak format')
 	parser.add_argument("--chromSizesFileName", required=False, \
 		help='File with list of chromosomes and their corresponding sizes')
+	parser.add_argument("--chromEdgeDistLimit", type=int, required=False, default=0, \
+                help='Distance from chromosome end for which peak will be considered, \
+			need chromSizesFileName to use for 3 prime end of chormosomes')
 	parser.add_argument("--chroms", action='append', required=False, \
 		help='Chromosomes for which the prediction will happen, \
 			can only use if input is in narrowPeak format')
@@ -138,7 +141,8 @@ def predictNewSequencesNoEvaluation(options):
 				createOptimalBedFilt=True, \
 				maxPeakLength=options.maxPeakLength, \
 				chroms=options.chroms, \
-				chromSizesFileName=options.chromSizesFileName)
+				chromSizesFileName=options.chromSizesFileName, \
+				chromEdgeDistLimit=options.chromEdgeDistLimit)
 		sequencesFileName, numSequences, sequenceIDs =\
 			convertFastaFileToSequencesFile(positiveFastaFileName)
 		print ("The number of sequences is:  " + str(numSequences))

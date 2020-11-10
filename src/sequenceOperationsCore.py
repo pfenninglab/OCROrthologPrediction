@@ -60,8 +60,7 @@ def defineInterval(r, halfWindowSize, summitPresent, windowSizeOdd=False):
                 return [chrom, start, end]
 
 def createSetForDeepLearning(genomeFileName, regionList, peakFileNamePrefix, halfWindowSize, summitPresent=True, maxPeakLength=None, \
-	chromSizesFileName=None,\
-        windowSizeOdd=False):
+	chromSizesFileName=None, windowSizeOdd=False, chromEdgeDistLimit=0):
         chromSizesDict = None
         if chromSizesFileName != None:
                 # Create a dictionary mapping chromosomes to their sizes
@@ -78,7 +77,7 @@ def createSetForDeepLearning(genomeFileName, regionList, peakFileNamePrefix, hal
                 [chrom, start, end] = defineInterval(r, halfWindowSize, summitPresent, windowSizeOdd)
                 if start < 0:
                         # Do not use the current region because it is too close to the start of the chromosome
-                        print ("Start < 0 for region: " + str(r))
+                        print ("Start < chromEdgeDistLimit for region: " + str(r))
                         continue
                 if chromSizesDict != None:
                         # Check if the current region is too close to the end of the chromosome
@@ -88,7 +87,7 @@ def createSetForDeepLearning(genomeFileName, regionList, peakFileNamePrefix, hal
                                 continue
                         if end > chromSizesDict[chrom]:
                                 # Do not use the current region because it is too close to the end of the chromosome
-                                print ("End greater than chromosome length for region: " + str(r))
+                                print ("End greater than chromosome length - chromEdgeDistLimit for region: " + str(r))
                                 continue
                 if (maxPeakLength != None) and (int(round(float(show_value(r[2])) - float(show_value(r[1])))) > maxPeakLength):
                         # The current region is too log, so skip it
@@ -107,8 +106,8 @@ def createSetForDeepLearning(genomeFileName, regionList, peakFileNamePrefix, hal
         fasta = summitPlusMinus.sequence(fi = genomeFileName, fo = fastaFileName)
         return summitPlusMinus, fastaFileName, regionListFilt
 
-def createPositiveSetFromNarrowPeaks(optimalPeakFileName, genomeFileName, dataShape, createOptimalBed=False, createOptimalBedFilt=True, maxPeakLength=None, \
-        chroms=None, chromSizesFileName=None):
+def createPositiveSetFromNarrowPeaks(optimalPeakFileName, genomeFileName, dataShape, createOptimalBed=False, createOptimalBedFilt=True, \
+	maxPeakLength=None, chroms=None, chromSizesFileName=None):
         # Create the positive set for the deep learning model
         optimalPeakFileNameElements = optimalPeakFileName.split(".")
         optimalPeakFileNamePrefix = ".".join(optimalPeakFileNameElements[0:-2])
@@ -134,7 +133,8 @@ def createPositiveSetFromNarrowPeaks(optimalPeakFileName, genomeFileName, dataSh
                 windowSizeOdd = True
         summitPlusMinus, positiveFastaFileName, optimalRegionListFiltPlus =\
                         createSetForDeepLearning(genomeFileName, optimalRegionListFilt, optimalPeakFileNamePrefix, halfWindowSize, \
-                                maxPeakLength=maxPeakLength, chromSizesFileName=chromSizesFileName, windowSizeOdd=windowSizeOdd)
+                                maxPeakLength=maxPeakLength, chromSizesFileName=chromSizesFileName, windowSizeOdd=windowSizeOdd, \
+				chromEdgeDistLimit=chromEdgeDistLimit)
         return optimalPeakFileNamePrefix, optimalRegionList, optimalRegionListFiltPlus, halfWindowSize, summitPlusMinus, positiveFastaFileName
 
 def loadPerBaseTracks(perBaseTrackFileNames):
