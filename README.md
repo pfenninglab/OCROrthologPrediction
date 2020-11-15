@@ -8,9 +8,13 @@ sequenceOperationsCore.py: utilities used in predictNewSequencesNoEvaluation.py
 
 ## Dependencies:
 python (version 2.7.17)
+
 numpy (version 1.16.6)
+
 pybedtools (version 0.8.1)
+
 keras (version 1.2.2)
+
 biopython (version 1.74)
 
 ## Models (in models):
