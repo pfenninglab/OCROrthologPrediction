@@ -107,7 +107,7 @@ def createSetForDeepLearning(genomeFileName, regionList, peakFileNamePrefix, hal
         return summitPlusMinus, fastaFileName, regionListFilt
 
 def createPositiveSetFromNarrowPeaks(optimalPeakFileName, genomeFileName, dataShape, createOptimalBed=False, createOptimalBedFilt=True, \
-	maxPeakLength=None, chroms=None, chromSizesFileName=None):
+	maxPeakLength=None, chroms=None, chromSizesFileName=None, chromEdgeDistLimit=0):
         # Create the positive set for the deep learning model
         optimalPeakFileNameElements = optimalPeakFileName.split(".")
         optimalPeakFileNamePrefix = ".".join(optimalPeakFileNameElements[0:-2])
