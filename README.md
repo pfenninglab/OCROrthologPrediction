@@ -17,6 +17,12 @@ keras (version 1.2.2)
 
 biopython (version 1.74)
 
+Theano (version 1.0.4)
+
+pygpu (version 0.7.6)
+
+cudnn (version 7.3.1)
+
 ## Models (in models):
 ### Brain models:
 #### Trained on mouse sequences, flanking region negatives:
