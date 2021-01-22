@@ -3,14 +3,27 @@ This repository contains models and code for predicting open chromatin status of
 
 ## Scripts (in src):
 predictNewSequencesNoEvaluation.py: takes machine learning model (json file for model architecture and hdf5 file for model weights) and gzipped narrowPeak or fasta file and makes predictions for the sequences
+
+makePredictNewSequencesNoEvaluationScript.py: creates a script for running predictNewSequencesNoEvaluation.py on a list of gzipped narrowPeak files
+
 sequenceOperationsCore.py: utilities used in predictNewSequencesNoEvaluation.py
 
 ## Dependencies:
 python (version 2.7.17)
+
 numpy (version 1.16.6)
+
 pybedtools (version 0.8.1)
+
 keras (version 1.2.2)
+
 biopython (version 1.74)
+
+Theano (version 1.0.4)
+
+pygpu (version 0.7.6)
+
+cudnn (version 7.3.1)
 
 ## Models (in models):
 ### Brain models:
