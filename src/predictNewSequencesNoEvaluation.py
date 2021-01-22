@@ -9,6 +9,12 @@ from sequenceOperationsCore import \
 	convertFastaFileToSequencesFile, createPositiveSetFromNarrowPeaks, \
 	makeSequenceInputArraysNoLabels, show_value
 
+"""
+This script makes predictions for a narrowPeak files and corresponding fasta and chromosome sizes file.
+The predictions are made with a model trained using keras version 1.2.2.
+To run: python predictNewSequencesNoEvaluation.py [options]
+"""
+
 def parseArgument():
 	# Parse the input
 	parser = argparse.ArgumentParser(description = \

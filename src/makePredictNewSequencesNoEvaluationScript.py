@@ -2,6 +2,12 @@ import sys
 import argparse
 from itertools import izip
 
+"""
+This script makes a script that will make predictions for list of narrowPeak files and corresponding fastas and chromosome sizes files.
+The predictions are made with a model trained using keras version 1.2.2.
+To run: python makePredictNewSequencesNoEvaluationScript.py [options]
+"""
+
 def parseArgument():
 	# Parse the input
 	parser = argparse.ArgumentParser(description =\
@@ -56,7 +62,7 @@ def parseArgument():
 
 
 def makePredictNewSequencesNoEvaluationScript(options):
-	# Make a script that will predict the values for a new set of sequences and evalute the predictions
+	# Make a script that will predict the values for a new set of sequences
 	narrowPeakFileNameListFile = open(options.narrowPeakFileNameListFileName)
 	genomeFileNameListFile = open(options.genomeFileNameListFileName)
 	chromSizesFileNameListFile = open(options.chromSizesFileNameListFileName)
