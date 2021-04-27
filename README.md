@@ -64,3 +64,10 @@ Weights file: liverEnhancer_euarchontaglireEnhLooseOrthNeg_500bp_conv5.hdf5
 Architecture file: liverEnhancer_mouseMacaqueRat_euarchontaglireEnhLooseOrthNeg_500bp_conv5_architecture.json
 
 Weights file: liverEnhancer_mouseMacaqueRat_euarchontaglireEnhLooseOrthNeg_500bp_conv5.hdf5
+
+
+## Cluster images (in clusters):
+Brain cluster images: in clusters/brain
+
+Liver cluster images: in clusters/liver
+
