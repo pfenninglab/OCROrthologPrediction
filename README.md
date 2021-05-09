@@ -71,5 +71,7 @@ Brain cluster images: in clusters/brain
 
 Liver cluster images: in clusters/liver
 
+Color images color bar: clusters/colorbar_wr.svg
+
 List of species in cluster heatmaps from left to right: clusters/BoreoeutheriaTreeNamesNew.txt
 
