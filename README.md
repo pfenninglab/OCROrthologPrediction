@@ -56,7 +56,7 @@ Liver cluster images: in clusters/liver
 
 Color images color bar: clusters/colorbar_wr.svg
 
-List of species in cluster heatmaps from left to right: clusters/BoreoeutheriaTreeNamesNew.txt
+List of species in cluster heatmaps from left to right: clusters/BoreoeutheriaTreeNames.txt
 
 
 ## Scripts for Generating Figures in Kaplow _et al_. (in evaluationScripts):
@@ -169,3 +169,5 @@ liftOver (http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/) (used for only
 
 ## Contact
 Irene Kaplow (ikaplow@cs.cmu.edu)
+
+Andreas Pfenning (apfenning@cmu.edu)
