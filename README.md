@@ -169,3 +169,5 @@ liftOver (http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/) (used for only
 
 ## Contact
 Irene Kaplow (ikaplow@cs.cmu.edu)
+
+Andreas Pfenning (apfenning@cmu.edu)
