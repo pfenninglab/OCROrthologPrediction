@@ -8,7 +8,7 @@ makePredictNewSequencesNoEvaluationScript.py: creates a script for running predi
 
 sequenceOperationsCore.py: utilities used in predictNewSequencesNoEvaluation.py
 
-Java scripts: perform k-means or hierarchical (Ward) clustering (can do both) using several distance metrics on open chromatin regions where features are ortholog predictions in different species; also removes OCRs with an insufficient number of usable orthologs
+Java program (in src/cluster): perform k-means or hierarchical (Ward) clustering (can do both) using several distance metrics on open chromatin regions where features are ortholog predictions in different species; also removes OCRs with an insufficient number of usable orthologs
 
 apClust.py: performs affinity propagation clustering on open chromatin regions or smaller clusters of open chromatin regions; requires a distance matrix in the format outputted by the Java scripts
 
@@ -151,9 +151,9 @@ pygpu (version 0.7.6)
 
 cudnn (version 7.3.1)
 
-Picocli (version 4.2.0 or later, must be in a package "picocli" for compilation, https://github.com/remkop/picocli) (used for only Java scripts in src)
+Picocli (version 4.2.0 or later, must be in a package "picocli" for compilation, https://github.com/remkop/picocli) (used for only Java program in src/cluster)
 
-Java (11 or later) (used for only Java scripts in src)
+Java (11 or later) (used for only Java program in src/cluster)
 
 MEME suite (version 4.12.0) (used for only utils and evaluationScripts)
 
