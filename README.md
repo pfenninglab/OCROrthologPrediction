@@ -8,6 +8,13 @@ makePredictNewSequencesNoEvaluationScript.py: creates a script for running predi
 
 sequenceOperationsCore.py: utilities used in predictNewSequencesNoEvaluation.py
 
+Java scripts: perform k-means or hierarchical (Ward) clustering (can do both) using several distance metrics on OCRs where features are ortholog predictions in different species; also removes OCRs with an insufficient number of usable orthologs
+
+apClust.py: performs affinity propagation clustering on OCRs or smaller clusters of OCRs; requires a distance matrix in the format outputted by the Java scripts
+
+reorderSpecies.py: re-orders or takes a subset of the columns of a matrix of OCR open chromatin predictions
+
+
 ## Models (in models):
 ### Brain models:
 #### Trained on mouse sequences, flanking region negatives:
@@ -116,9 +123,19 @@ processLolaResults.py: compiles results from multiple runs of LOLA into a table
 
 getNumberUsableOrthologs.py: gets the number of usable orthologs for open chromatin regions
 
+## Scripts for Processing Clusters in Kaplow _et al_. (in clusterProcessingScripts):
+collectSpeciesPeaks.py: collects orthologs of OCRs in one species 
+
+renameAndClean.py: gives OCRs non-redundant names; also filters OCRs so that, if the OCRs come fr in srcom multiple species, only 1 OCR in each set of orthologous OCRs is used
+
+getHumanClusterCoords.py: collects all human orthologs of all OCRs in each cluster that is considered "human-active"
+
+extractClusters.py: collects OCR ortholog open chromatin status predictions for all OCRs in each of a list of clusters for figure generation
+
+make_heatmap.r: generates heatmap figures representing clusters
 
 ## Dependencies:
-python (version 2.7.17)
+python (version 3.7 for src and clusterProcessingScripts; version 2.7.17 for evaluationScripts and utils; version 2.7.17 can also be used for predictNewSequencesNoEvaluation.py, makePredictNewSequencesNoEvaluationScript.py, and sequenceOperationsCore.py in src)
 
 numpy (version 1.16.6)
 
@@ -133,6 +150,10 @@ Theano (version 1.0.4)
 pygpu (version 0.7.6)
 
 cudnn (version 7.3.1)
+
+Picocli (version 4.2.0 or later, must be in a package "picocli" for compilation, https://github.com/remkop/picocli) (used for only Java scripts in src)
+
+Java (11 or later) (used for only Java scripts in src)
 
 MEME suite (version 4.12.0) (used for only utils and evaluationScripts)
 
@@ -166,8 +187,12 @@ LOLA (version 1.16.0) (used for only utils and evaluationScripts)
 
 liftOver (http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/) (used for only utils and evaluationScripts)
 
+gplots (version 3.0.1, https://github.com/ChristophH/gplots) (used for only make_heatmap.r in clusterProcessingScripts)
+
 
 ## Contact
 Irene Kaplow (ikaplow@cs.cmu.edu)
 
 Andreas Pfenning (apfenning@cmu.edu)
+
+Daniel Schaffer (dschaffe@andrew.cmu.edu)
