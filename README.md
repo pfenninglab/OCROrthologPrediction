@@ -135,7 +135,7 @@ extractClusters.py: collects open chromatin region ortholog open chromatin statu
 make_heatmap.r: generates heatmap figures representing clusters
 
 ## Dependencies:
-python (version 3.7 for src and clusterProcessingScripts; version 2.7.17 for evaluationScripts and utils; version 2.7.17 can also be used for predictNewSequencesNoEvaluation.py, makePredictNewSequencesNoEvaluationScript.py, and sequenceOperationsCore.py in src)
+python (version 3.7.1 for src and clusterProcessingScripts; version 2.7.17 for evaluationScripts and utils; version 2.7.17 can also be used for predictNewSequencesNoEvaluation.py, makePredictNewSequencesNoEvaluationScript.py, and sequenceOperationsCore.py in src)
 
 numpy (version 1.16.6)
 
