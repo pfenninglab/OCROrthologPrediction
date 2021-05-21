@@ -151,6 +151,8 @@ pygpu (version 0.7.6)
 
 cudnn (version 7.3.1)
 
+h5py (version 2.9.0)
+
 Picocli (version 4.2.0 or later, must be in a package "picocli" for compilation, https://github.com/remkop/picocli) (used for only Java program in src/cluster)
 
 Java (11 or later) (used for only Java program in src/cluster)
