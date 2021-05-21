@@ -135,7 +135,7 @@ extractClusters.py: collects open chromatin region ortholog open chromatin statu
 make_heatmap.r: generates heatmap figures representing clusters
 
 ## Dependencies:
-python (version 3.7 for src and clusterProcessingScripts; version 2.7.17 for evaluationScripts and utils; version 2.7.17 can also be used for predictNewSequencesNoEvaluation.py, makePredictNewSequencesNoEvaluationScript.py, and sequenceOperationsCore.py in src)
+python (version 3.7.1 for src and clusterProcessingScripts; version 2.7.17 for evaluationScripts and utils; version 2.7.17 can also be used for predictNewSequencesNoEvaluation.py, makePredictNewSequencesNoEvaluationScript.py, and sequenceOperationsCore.py in src)
 
 numpy (version 1.16.6)
 
@@ -150,6 +150,8 @@ Theano (version 1.0.4)
 pygpu (version 0.7.6)
 
 cudnn (version 7.3.1)
+
+h5py (version 2.9.0)
 
 Picocli (version 4.2.0 or later, must be in a package "picocli" for compilation, https://github.com/remkop/picocli) (used for only Java program in src/cluster)
 
