@@ -1,5 +1,5 @@
 # OCROrthologPrediction
-This repository contains models and code for predicting open chromatin status of OCR orthologs.
+This repository contains models and code for predicting open chromatin status of open chromatin region orthologs.
 
 ## Scripts for General Use (in src):
 predictNewSequencesNoEvaluation.py: takes machine learning model (json file for model architecture and hdf5 file for model weights) and gzipped narrowPeak or fasta file and makes predictions for the sequences
@@ -8,11 +8,11 @@ makePredictNewSequencesNoEvaluationScript.py: creates a script for running predi
 
 sequenceOperationsCore.py: utilities used in predictNewSequencesNoEvaluation.py
 
-Java scripts: perform k-means or hierarchical (Ward) clustering (can do both) using several distance metrics on OCRs where features are ortholog predictions in different species; also removes OCRs with an insufficient number of usable orthologs
+Java scripts: perform k-means or hierarchical (Ward) clustering (can do both) using several distance metrics on open chromatin regions where features are ortholog predictions in different species; also removes OCRs with an insufficient number of usable orthologs
 
-apClust.py: performs affinity propagation clustering on OCRs or smaller clusters of OCRs; requires a distance matrix in the format outputted by the Java scripts
+apClust.py: performs affinity propagation clustering on open chromatin regions or smaller clusters of open chromatin regions; requires a distance matrix in the format outputted by the Java scripts
 
-reorderSpecies.py: re-orders or takes a subset of the columns of a matrix of OCR open chromatin predictions
+reorderSpecies.py: re-orders or takes a subset of the columns of a matrix of open chromatin region ortholog open chromatin predictions
 
 
 ## Models (in models):
@@ -99,7 +99,7 @@ filterPeakName.py: filters a bed file to include (or exclude) only peaks in a li
 
 makeFilterPeakNameScript.py: makes a script that will run filterPeakName.py on a list of pairs of files
 
-predictNewSequences.py: makes predictions using a machine learning model for regions defined in a narrowPeak or fasta file and evaluate the predictions
+predictNewSequences.py: makes predictions using a machine learning model for regions defined in a narrowPeak or fasta file and evaluates the performance
 
 sequenceOperations.py: manipulates regions and sequences to prepare them for deep learning models
 
@@ -107,7 +107,7 @@ MLOperations.py: evaluates machine learning models according to different metric
 
 makeViolinPlotTissueComparison.py: makes violoin plots for evaluating model peformance on tissue-specific open chromatin regions and shared open chromatin regions
 
-gatherPeakPredictionsAcrossSpecies.py: uses a list of predictions of open chromatin regions in different species to make a region by species matrix of predictions
+gatherPeakPredictionsAcrossSpecies.py: uses a list of open chromatin predictions of open chromatin region orthologs in different species to make a region by species matrix of predictions
 
 convertChromNames.py: converts chromosome names in a bed file from one naming convention to another
 
@@ -117,20 +117,20 @@ convertH3K27acMatToBinaryMat.py: converts a table with H3K27ac ChIP-seq conserva
 
 runLOLA.r: runs lola for a pair of bed files
 
-makeLolaScript.py: makes script that runs LOLA for pairs of bed files and a background bed file
+makeLolaScript.py: makes script that runs runLOLA.r for pairs of bed files and a background bed file
 
 processLolaResults.py: compiles results from multiple runs of LOLA into a table
 
 getNumberUsableOrthologs.py: gets the number of usable orthologs for open chromatin regions
 
 ## Scripts for Processing Clusters in Kaplow _et al_. (in clusterProcessingScripts):
-collectSpeciesPeaks.py: collects orthologs of OCRs in one species 
+collectSpeciesPeaks.py: collects orthologs of open chromatin regions in one species 
 
-renameAndClean.py: gives OCRs non-redundant names; also filters OCRs so that, if the OCRs come fr in srcom multiple species, only 1 OCR in each set of orthologous OCRs is used
+renameAndClean.py: gives open chromatin regions non-redundant names; also filters open chromatin regions so that, if the open chromatin regions come from multiple species, only 1 open chormatin region in each set of orthologous open chromatin regions is used
 
-getHumanClusterCoords.py: collects all human orthologs of all OCRs in each cluster that is considered "human-active"
+getHumanClusterCoords.py: collects all human orthologs of all open chromatin regions in each cluster that is considered "human-active"
 
-extractClusters.py: collects OCR ortholog open chromatin status predictions for all OCRs in each of a list of clusters for figure generation
+extractClusters.py: collects open chromatin region ortholog open chromatin status predictions for all open chromatin regions in each of a list of clusters for figure generation
 
 make_heatmap.r: generates heatmap figures representing clusters
 
