@@ -9,6 +9,8 @@ import pyximport
 importers = pyximport.install()
 pyximport.uninstall(*importers)
 
+# Some methods were created with assistance from Nathan Boley; those methods were not used in Kaplow et al.
+
 class narrowPeak(object):
 	# narrowPeak class
 	def __init__(self, peakLine):

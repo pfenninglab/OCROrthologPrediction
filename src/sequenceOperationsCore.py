@@ -83,7 +83,7 @@ def createSetForDeepLearning(genomeFileName, regionList, peakFileNamePrefix, hal
                         # Check if the current region is too close to the end of the chromosome
                         if chrom not in chromSizesDict:
                                 # The current chromosome is not in the dictionary, so skip it
-                                print "Chromosome " + chrom + " is not in the list of chromosomes"
+                                print ("Chromosome " + chrom + " is not in the list of chromosomes")
                                 continue
                         if end > chromSizesDict[chrom]:
                                 # Do not use the current region because it is too close to the end of the chromosome
@@ -126,7 +126,7 @@ def createPositiveSetFromNarrowPeaks(optimalPeakFileName, genomeFileName, dataSh
         else:
                         # Include all of the chromosomes
                         optimalRegionListFilt = optimalRegionList
-        halfWindowSize = dataShape[2]/2
+        halfWindowSize = int(dataShape[2]/2)
         windowSizeOdd = False
         if dataShape[2] % 2 > 0:
                 # The window size is odd, so put an extra base on the upstream end
@@ -249,7 +249,7 @@ def makeSequenceInputArraysNoLabels(sequenceFileName, dataShape, numSequences, p
         fracNs = float(totalNs)/float(dataShape[2] * numSequences)
         print("The fraction of Ns is: " + str(fracNs))
         sequenceFile.close()
-	if multiMode:
+        if multiMode:
                 # Re-format the data for multi-moding
                 return makeMultiModedData(allData, dataShape, len(perBaseTrackFileNames))
         return allData, skippedIndices
