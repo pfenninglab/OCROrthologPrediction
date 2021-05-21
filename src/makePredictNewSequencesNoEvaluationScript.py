@@ -1,6 +1,5 @@
 import sys
 import argparse
-from itertools import izip
 
 """
 This script makes a script that will make predictions for list of narrowPeak files and corresponding fastas and chromosome sizes files.
@@ -28,13 +27,13 @@ def parseArgument():
 		default="predictedClasses.txt", required=False, \
 		help='Suffix of file names where predicted classes will be recorded, \
 			should not start with _')
-        parser.add_argument("--predictedProbaFileNameSuffix", \
+	parser.add_argument("--predictedProbaFileNameSuffix", \
 		default="predictedProba.txt", required=False, \
 		help='Suffix of file names where \
 			predicted probabilities will be recorded, \
 			should not start with _, \
 			will not be used for regression models')
-        parser.add_argument("--genomeFileNameListFileName", required=True, \
+	parser.add_argument("--genomeFileNameListFileName", required=True, \
 		help='File with genome sequence file list, \
 			where the genome in each line corresponds to \
 			the narrowPeak file in the same line')
@@ -47,7 +46,7 @@ def parseArgument():
 		required=False, \
                 help='Remove peaks on unknown, alternative, \
 			and random chromosomes before making predictions')
-        parser.add_argument("--logLabels", action='store_true', \
+	parser.add_argument("--logLabels", action='store_true', \
 		required=False, \
 		help='Include if labels (if labels are signals) \
 			should be log2ed')
@@ -69,7 +68,7 @@ def makePredictNewSequencesNoEvaluationScript(options):
 	scriptFile = open(options.scriptFileName, 'w+')
 
 	for narrowPeakFileNameStr, genomeFileNameStr, chromSizesFileNameStr in \
-		izip(narrowPeakFileNameListFile, genomeFileNameListFile, \
+		zip(narrowPeakFileNameListFile, genomeFileNameListFile, \
 			chromSizesFileNameListFile):
 		# Iterate through the lines of the narrowPeak file list and the corresponding genomes and make a line in the script for each
 		narrowPeakFileName = narrowPeakFileNameStr.strip()

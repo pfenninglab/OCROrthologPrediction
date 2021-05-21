@@ -88,19 +88,19 @@ def predictNewSequencesClassificationNoEval(options, model, X, peakNamesForData)
 	if options.predictedProbaFileName != None:
 		# Record the predicted probabilities
 		predictedProbaFile = open(options.predictedProbaFileName, 'w+')
-                for i in range(X.shape[0]):
+		for i in range(X.shape[0]):
                         # Iterate through the predicted classes for each and record them along with the peak names
                         predictedProbaFile.write(peakNamesForData[i] + "\t" + \
 				"\t".join([str(round(pp, 6)) for pp in predictedProba[i,:]]) + \
 				"\n")
-                predictedProbaFile.close()
+		predictedProbaFile.close()
 
 
 def predictNewSequencesRegressionNoEval(model, X, peakNamesForData):
 	print("Evaluating model...")
 	predictions = model.predict(X);
 	print("Saving predictions (if files have been specified)")
-        if options.predictedClassesFileName != None:
+	if options.predictedClassesFileName != None:
                 # Record the predictions
                 predictedClassesFile =\
 			open(options.predictedClassesFileName, 'w+')
@@ -157,14 +157,14 @@ def predictNewSequencesNoEvaluation(options):
 				(1,4,options.sequenceLength), numSequences, \
                         	perBaseTrackFileNames=options.perBaseTrackFileName, \
 				multiMode=options.multiMode)
-        	index = 0
-        	for region in optimalRegionListFiltPlus:
+		index = 0
+		for region in optimalRegionListFiltPlus:
                 	# Iterate through the peaks and make a list of the peak names corresponding to the numpy arrays
-                	if index not in skippedIndices:
+			if index not in skippedIndices:
                         	# The current peak was included in the dataset
-                        	peakNamesForData.append(show_value(region[3]))
-                        	peakNamesForData.append(show_value(region[3]))
-                	index = index + 1
+				peakNamesForData.append(show_value(region[3]))
+				peakNamesForData.append(show_value(region[3]))
+			index = index + 1
 
 	if options.classification:
 		# Evaluate the classification model
