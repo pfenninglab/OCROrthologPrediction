@@ -26,7 +26,6 @@ def createBedToolForFilteredList(regionList, createBedFilt, chroms, bedFiltFileN
         if bedFiltFileName:
                 # Save the region list to a file
                 regionListFilt = bt.BedTool(bedFiltFileName)
-        bt.helpers.cleanup()
         return regionListFilt
 
 def show_value(s):
