@@ -2,11 +2,19 @@
 This repository contains models and code for predicting open chromatin status of open chromatin region orthologs.
 
 ## Scripts for General Use (in src):
+filterPeakName.py: takes a bed file and a list of peak names and filters the bed file to include (or exclude) only peaks in a list of peak names
+
+makeFilterPeakNameScript.py: makes a script that will run filterPeakName.py on a list of pairs of files
+
 predictNewSequencesNoEvaluation.py: takes machine learning model (json file for model architecture and hdf5 file for model weights) and gzipped narrowPeak or fasta file and makes predictions for the sequences
 
 makePredictNewSequencesNoEvaluationScript.py: creates a script for running predictNewSequencesNoEvaluation.py on a list of gzipped narrowPeak files
 
 sequenceOperationsCore.py: utilities used in predictNewSequencesNoEvaluation.py
+
+averagePeakPredictions.py: takes a file with a list of predictions for a list of sequences and the reverse complement and averages the predictions between sequences and their reverse complements
+
+makeViolinPlotForList.py: takes a list of files and a list of column numbers corresponding to the columns in those files with the data that should be included in the violin plot and makes a violin plot with the data from each file as its own violin
 
 Java program (in src/cluster): perform k-means or hierarchical (Ward) clustering (can do both) using several distance metrics on open chromatin regions where features are ortholog predictions in different species; also removes OCRs with an insufficient number of usable orthologs
 
@@ -95,10 +103,6 @@ Note that some p-values in comments have not been properly corrected for multipl
 
 
 ## Methods Used in Scripts in evaluationScripts (in utils):
-filterPeakName.py: filters a bed file to include (or exclude) only peaks in a list of peak names
-
-makeFilterPeakNameScript.py: makes a script that will run filterPeakName.py on a list of pairs of files
-
 predictNewSequences.py: makes predictions using a machine learning model for regions defined in a narrowPeak or fasta file and evaluates the performance
 
 sequenceOperations.py: manipulates regions and sequences to prepare them for deep learning models
@@ -135,7 +139,7 @@ extractClusters.py: collects open chromatin region ortholog open chromatin statu
 make_heatmap.r: generates heatmap figures representing clusters
 
 ## Dependencies:
-python (version 3.7.1 for src and clusterProcessingScripts; version 2.7.17 for evaluationScripts and utils; version 2.7.17 can also be used for predictNewSequencesNoEvaluation.py, makePredictNewSequencesNoEvaluationScript.py, and sequenceOperationsCore.py in src)
+python (version 3.7.1 for src and clusterProcessingScripts; version 2.7.17 for evaluationScripts and utils; version 2.7.17 can also be used for filterPeakName.py, predictNewSequencesNoEvaluation.py, makePredictNewSequencesNoEvaluationScript.py, and sequenceOperationsCore.py in src)
 
 numpy (version 1.16.6)
 
@@ -152,6 +156,8 @@ pygpu (version 0.7.6)
 cudnn (version 7.3.1)
 
 h5py (version 2.9.0)
+
+seaborn (version 0.9.0 or 0.11.1)
 
 Picocli (version 4.2.0 or later, must be in a package "picocli" for compilation, https://github.com/remkop/picocli) (used for only Java program in src/cluster)
 
@@ -172,8 +178,6 @@ matplotlib (version 2.2.3) (used for only utils and evaluationScripts)
 prg (https://github.com/meeliskull/prg/blob/master/R_package/prg/R/prg.R) (used for only utils and evaluationScripts)
 
 rpy2 (version 2.8.6) (used for only utils and evaluationScripts)
-
-seaborn (version 0.9.0) (used for only utils and evaluationScripts)
 
 Hierarchical Alignment (HAL) Format API (version 2.1) (used for only utils and evaluationScripts)
 
