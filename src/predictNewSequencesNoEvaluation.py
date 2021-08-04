@@ -54,6 +54,7 @@ def parseArgument():
 	parser.add_argument("--chroms", action='append', required=False, \
 		help='Chromosomes for which the prediction will happen, \
 			can only use if input is in narrowPeak format')
+        parser.add_argument("--maxFracNs", type=float, required=False, default=1.0, help='Maximum fraction of N\'s per sequence with prediction')
 	parser.add_argument("--createOptimalBed", action='store_true', required=False, \
                 help='Remove peaks on unknown, alternative, \
 			and random chromosomes before making predictions')
@@ -135,7 +136,16 @@ def predictNewSequencesNoEvaluation(options):
                 	makeSequenceInputArraysNoLabels(sequencesFileName, \
 				(1,4,options.sequenceLength), numSequences, \
                         	perBaseTrackFileNames=options.perBaseTrackFileName, \
-				multiMode=options.multiMode)
+				multiMode=options.multiMode, maxFracNs=options.maxFracNs)
+                if len(skippedIndices) > 0:
+			# Modify peakNamesForData to not include the names of the peaks with too many N's
+			peakNamesForDataFilt = []
+			for i in range(lenPeakNamesForData):
+				# Iterate through the peak names and include only those for peaks that do not have too many N's
+				if i not in skippedIndices:
+					# Include the current peak
+					peakNamesForDataFilt.append(peakNamesForData[i])
+			peakNamesForData = peakNamesForDataFilt
 
 	elif options.narrowPeakFileName != None:
 		# Only the peaks have been provided, so get the sequences from the peak summits +/-
@@ -156,7 +166,8 @@ def predictNewSequencesNoEvaluation(options):
                 	makeSequenceInputArraysNoLabels(sequencesFileName, \
 				(1,4,options.sequenceLength), numSequences, \
                         	perBaseTrackFileNames=options.perBaseTrackFileName, \
-				multiMode=options.multiMode)
+				multiMode=options.multiMode, maxFracNs=options.maxFracNs)
+                print("The number of sequences removed due to too many N's is: " + str(len(skippedIndices)))
 		index = 0
 		for region in optimalRegionListFiltPlus:
                 	# Iterate through the peaks and make a list of the peak names corresponding to the numpy arrays
@@ -165,6 +176,7 @@ def predictNewSequencesNoEvaluation(options):
 				peakNamesForData.append(show_value(region[3]))
 				peakNamesForData.append(show_value(region[3]))
 			index = index + 1
+				
 
 	if options.classification:
 		# Evaluate the classification model

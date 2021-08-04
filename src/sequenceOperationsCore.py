@@ -218,21 +218,22 @@ def makeSequenceInputArraysNoLabels(sequenceFileName, dataShape, numSequences, p
         sampleCount = 0
         skippedIndices = []
         totalNs = 0
+        index = 0
         for sequence in sequenceFile:
                 # Iterate through the fasta sequences and create the alphabets for the sequence and the reverse complement of each
                 perBaseTracksMat = createPerBaseTracksMat(perBaseTracks, channel3, sampleCount, 2)
                 sequenceArray, numNs = oneHotEncode(sequence.strip())
                 sequenceFracNs = float(numNs)/float(dataShape[2])
+                index = index + 1
                 if sequenceFracNs > maxFracNs:
                         # The percentage of N's in the current sequence is too high
-                        print("This sequence has too high of a percentage of N's: " + sequence + " " + str(sequenceFracNs))
                         numSequences = numSequences - 1
-                        skippedIndices.append(sampleCount/2)
+                        skippedIndices.append(index - 1)
                         continue
                 if sequenceArray.shape[1] != dataShape[2]:
                         # The current sequences is the wrong length, so skip it
                         print("This sequence is the wrong length: " + sequence)
-                        skippedIndices.append(sampleCount/2)
+                        skippedIndices.append(index - 1)
                         numSequences = numSequences - 1
                         continue
                 totalNs = totalNs + numNs
@@ -245,6 +246,7 @@ def makeSequenceInputArraysNoLabels(sequenceFileName, dataShape, numSequences, p
                 allData[sampleCount,:,:,:] = sequenceArrayReshapeRC
                 sampleCount = sampleCount + 1
         assert (sampleCount == numSequences*2)
+        allData = allData[0:sampleCount,:,:,:] # Remove empty entries for skipped indices
         fracNs = float(totalNs)/float(dataShape[2] * numSequences)
         print("The fraction of Ns is: " + str(fracNs))
         sequenceFile.close()

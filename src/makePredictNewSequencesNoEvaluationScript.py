@@ -46,6 +46,7 @@ def parseArgument():
 		required=False, \
                 help='Remove peaks on unknown, alternative, \
 			and random chromosomes before making predictions')
+        parser.add_argument("--maxFracNs", type=float, required=False, default=1.0, help='Maximum fraction of N\'s per sequence with prediction')
 	parser.add_argument("--logLabels", action='store_true', \
 		required=False, \
 		help='Include if labels (if labels are signals) \
@@ -91,7 +92,7 @@ def makePredictNewSequencesNoEvaluationScript(options):
 			predictedClassesFileName, "--predictedProbaFileName", \
 			predictedProbaFileName, "--genomeFileName", \
 			genomeFileNameStr.strip(), "--chromSizesFileName", \
-			chromSizesFileNameStr.strip()]))
+			chromSizesFileNameStr.strip(), "--maxFracNs", str(options.maxFracNs)]))
 
 		if options.createOptimalBed:
 			# Add the createOptimalBed option
