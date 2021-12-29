@@ -13,6 +13,10 @@ def parseArgument():
                         help='File with the list of peak names')
         parser.add_argument("--peakNameCol", type=int, required=False, default=0,\
                         help='Column in the peak name file that has the peak names')
+	parser.add_argument("--peakListFileNameIsList", action="store_true", required=False,\
+                        help='List is peak file names and not unfiltered peak file names')
+	parser.add_argument("--removePeaks", action="store_true", required=False,\
+                        help='Remove the peaks in the peak list instead of removing all other peaks')
         parser.add_argument("--numFileNameElementsToRemove", type=int, required=False, default=1,\
                         help='Number of parts of the input file name, separted by ., to remove when creating the output file name')
         parser.add_argument("--outputFileNameSuffix", required=True,\
@@ -24,18 +28,42 @@ def parseArgument():
         options = parser.parse_args()
         return options
 
+def finishFilterPeakScriptLine(options, scriptFile):
+	# Add the remaining options to the line in the script
+	if options.removePeaks:
+		# Add the removePeaks option
+		scriptFile.write(" --removePeaks")
+	scriptFile.write("\n")
+	return scriptFile
+
 def makeFilterPeakNameScript(options):
-	unfilteredPeakFileNameListFile = open(options.unfilteredPeakFileNameListFileName)
 	scriptFile = open(options.scriptFileName, 'w+')
-	for line in unfilteredPeakFileNameListFile:
-		# Iterate through the unfiltered peak files and make a line in the script for each
-		unfilteredPeakFileName = line.strip()
-		unfilteredPeakFileNameElements = unfilteredPeakFileName.split(".")
-		outputFileName = ".".join(unfilteredPeakFileNameElements[0:0-options.numFileNameElementsToRemove]) + "." + options.outputFileNameSuffix
-		scriptFile.write(" ".join(["python", options.codePath + "/filterPeakName.py", "--unfilteredPeakFileName", unfilteredPeakFileName, \
-			"--unfilteredPeakNameCol", str(options.unfilteredPeakNameCol), "--peakListFileName", options.peakListFileName, "--peakNameCol", \
-			str(options.peakNameCol), "--outputFileName", outputFileName]) + "\n")
-	unfilteredPeakFileNameListFile.close()
+	if not options.peakListFileNameIsList:
+		# The unfiltered peak files are a list and there is one peak file
+		unfilteredPeakFileNameListFile = open(options.unfilteredPeakFileNameListFileName)
+		for line in unfilteredPeakFileNameListFile:
+			# Iterate through the unfiltered peak files and make a line in the script for each
+			unfilteredPeakFileName = line.strip()
+			unfilteredPeakFileNameElements = unfilteredPeakFileName.split(".")
+			outputFileName = ".".join(unfilteredPeakFileNameElements[0:0-options.numFileNameElementsToRemove]) + "." + options.outputFileNameSuffix
+			scriptFile.write(" ".join(["python", options.codePath + "/filterPeakName.py", "--unfilteredPeakFileName", unfilteredPeakFileName, \
+				"--unfilteredPeakNameCol", str(options.unfilteredPeakNameCol), "--peakListFileName", options.peakListFileName, "--peakNameCol", \
+				str(options.peakNameCol), "--outputFileName", outputFileName]))
+			scriptFile = finishFilterPeakScriptLine(options, scriptFile)
+		unfilteredPeakFileNameListFile.close()
+	else:
+		# The peak files are a list and there is one unfiltered peak file
+		peakListFileNameListFile = open(options.peakListFileName)
+		for line in peakListFileNameListFile:
+			# Iterate through the filtered peak files and make a line in the script for each
+			plfn = line.strip()
+			plfnElements = plfn.split(".")
+			outputFileName = ".".join(plfnElements[0:0-options.numFileNameElementsToRemove]) + "." + options.outputFileNameSuffix
+			scriptFile.write(" ".join(["python", options.codePath + "/filterPeakName.py", "--unfilteredPeakFileName", \
+				options.unfilteredPeakFileNameListFileName, "--unfilteredPeakNameCol", str(options.unfilteredPeakNameCol), "--peakListFileName", plfn, \
+				"--peakNameCol", str(options.peakNameCol), "--outputFileName", outputFileName]))
+			scriptFile = finishFilterPeakScriptLine(options, scriptFile)
+		peakListFileNameListFile.close()
 	scriptFile.close()
 
 if __name__=="__main__":

@@ -26,6 +26,10 @@ def parseArgument():
 	parser.add_argument("--fastaFileName", required=False, \
 		help='Sequences file in fasta format, \
 			should not also have narrowPeakFileName')
+	parser.add_argument("--padUpstream", type=int, required=False, \
+                default=0, help='Number of upstream Ns to pad, should be 0 if input is narrowPeak file')
+	parser.add_argument("--padDownstream", type=int, required=False, \
+                default=0, help='Number of downstream Ns to pad, should be 0 if input is narrowPeak file')
 	parser.add_argument("--narrowPeakFileName", required=False, \
 		help='Regions in narrowPeak format, \
 			should not also have fastaFileName')
@@ -128,7 +132,7 @@ def predictNewSequencesNoEvaluation(options):
 			"should not have a narrowPeakFileName input because \
 				also have a fastaFileName input"
 		sequencesFileName, numSequences, sequenceIDs =\
-			convertFastaFileToSequencesFile(options.fastaFileName)
+			convertFastaFileToSequencesFile(options.fastaFileName, options.padUpstream, options.padDownstream)
 		peakNamesForData =\
 			list(itertools.chain.from_iterable(itertools.repeat(sID, 2) \
 				for sID in sequenceIDs))
@@ -149,6 +153,7 @@ def predictNewSequencesNoEvaluation(options):
 
 	elif options.narrowPeakFileName != None:
 		# Only the peaks have been provided, so get the sequences from the peak summits +/-
+		assert ((options.padUpstream == 0) and (options.padDownstream == 0))
 		_, _, optimalRegionListFiltPlus, _, _, positiveFastaFileName =\
 			createPositiveSetFromNarrowPeaks(options.narrowPeakFileName, \
 				options.genomeFileName, \
