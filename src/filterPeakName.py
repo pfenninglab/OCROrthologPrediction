@@ -9,11 +9,11 @@ def parseArgument():
         parser.add_argument("--unfilteredPeakFileName", required=True,\
                 help='File with unfiltered list of peaks (can be gzipped), must have a column with peak names')
         parser.add_argument("--unfilteredPeakNameCol", type=int, required=False, default=3,\
-                help='Column in the unfiltered peak name file that has the peak names')
+                help='Column in the unfiltered peak name file that has the peak names, numbers are 0-indexed')
         parser.add_argument("--peakListFileName", required=True,\
                 help='File with the list of peak names (can be gzipped)')
         parser.add_argument("--peakNameCol", type=int, required=False, default=0,\
-                help='Column in the peak name file that has the peak names')
+                help='Column in the peak name file that has the peak names, numbers are 0-indexed')
         parser.add_argument("--allCaps", action="store_true", required=False,\
                 help='Convert all peak names to capital letters')
         parser.add_argument("--removePeaks", action="store_true", required=False,\
