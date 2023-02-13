@@ -32,7 +32,7 @@ def parseArgument():
 def filterPeakNames(options):
 	# Filter a file of peaks based on the peak names
 	peakListFile =\
-		gzip.open(options.peakListFileName) if options.peakListFileName.endswith("gz") else \
+		gzip.open(options.peakListFileName, mode = 'rt') if options.peakListFileName.endswith("gz") else \
 			open(options.peakListFileName) # Check if the file is gzipped when determining how to open it
 	peakList = []
 	for line in peakListFile:
@@ -53,7 +53,7 @@ def filterPeakNames(options):
 	print("The first peak is: " + peakList[0])
 	peakListFile.close()
 	unfilteredPeakFile =\
-		gzip.open(options.unfilteredPeakFileName) if options.unfilteredPeakFileName.endswith("gz") else \
+		gzip.open(options.unfilteredPeakFileName, mode = 'rt') if options.unfilteredPeakFileName.endswith("gz") else \
 			open(options.unfilteredPeakFileName) # Check if the file is gzipped when determining how to open it
 	outputFile = open(options.outputFileName, 'w+')
 	for line in unfilteredPeakFile:
