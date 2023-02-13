@@ -66,7 +66,7 @@ def defineInterval(r, halfWindowSize, summitPresent, windowSizeOdd=False):
                 return [chrom, start, end]
 
 def createSetForDeepLearning(genomeFileName, regionList, peakFileNamePrefix, halfWindowSize, summitPresent=True, maxPeakLength=None, \
-	chromSizesFileName=None, windowSizeOdd=False, chromEdgeDistLimit=0):
+	chromSizesFileName=None, windowSizeOdd=False, chromEdgeDistLimit=0, nameOnly=False):
         chromSizesDict = None
         if chromSizesFileName != None:
                 # Create a dictionary mapping chromosomes to their sizes
@@ -99,7 +99,7 @@ def createSetForDeepLearning(genomeFileName, regionList, peakFileNamePrefix, hal
                         # The current region is too log, so skip it
                         continue
                 regionListFiltList.append(r)
-                intervalList.append(bt.Interval(chrom, start, end, show_value(r[4])))
+                intervalList.append(bt.Interval(chrom, start, end, show_value(r[3])))
         regionListFilt = bt.BedTool(regionListFiltList)
         summitPlusMinus = bt.BedTool(intervalList)
         fastaFileName = None
@@ -109,7 +109,13 @@ def createSetForDeepLearning(genomeFileName, regionList, peakFileNamePrefix, hal
         else:
                 # Add 1 to the half window size in the name of the fasta file
                 fastaFileName = ".".join([peakFileNamePrefix, "plusMinus" + str(halfWindowSize + 1) + "bp", "fa"])
-        fasta = summitPlusMinus.sequence(fi = genomeFileName, fo = fastaFileName)
+        fasta = None
+        if nameOnly == False:
+                # Create the fasta file with the default options
+                fasta = summitPlusMinus.sequence(fi = genomeFileName, fo = fastaFileName)
+        else:
+                # Create the fasta file with the nameOnly option
+                fasta = summitPlusMinus.sequence(fi = genomeFileName, fo = fastaFileName, nameOnly = True)
         return summitPlusMinus, fastaFileName, regionListFilt
 
 def createPositiveSetFromNarrowPeaks(optimalPeakFileName, genomeFileName, dataShape, createOptimalBed=False, createOptimalBedFilt=True, \

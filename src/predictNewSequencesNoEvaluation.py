@@ -92,6 +92,7 @@ def predictNewSequencesClassificationNoEval(options, model, X, peakNamesForData)
 	predictedProba = model.predict_proba(X);
 	if options.predictedProbaFileName != None:
 		# Record the predicted probabilities
+		print(options.predictedProbaFileName)
 		predictedProbaFile = open(options.predictedProbaFileName, 'w+')
 		for i in range(X.shape[0]):
                         # Iterate through the predicted classes for each and record them along with the peak names
