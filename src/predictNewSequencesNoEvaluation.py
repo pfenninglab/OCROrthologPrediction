@@ -4,6 +4,7 @@ import os
 import itertools
 import numpy as np
 import pybedtools as bt
+import theano.ifelse
 from keras.models import model_from_json # Assumes keras version 1
 from sequenceOperationsCore import (convertFastaFileToSequencesFile, createPositiveSetFromNarrowPeaks, makeSequenceInputArraysNoLabels, show_value)
 
