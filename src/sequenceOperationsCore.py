@@ -11,16 +11,16 @@ def convertFastaFileToSequencesFile(fastaFileName, padUpstream=0, padDownstream=
         sequencesFile = open(sequencesFileName, 'w+')
         sequenceIDs = []
         for record in SeqIO.parse(fastaFileName, "fasta"):
-		sequence = str(record.seq)
-                for i in range(padUpstream):
-                        # Add an N to the sequence upstream
-                        sequence = "N" + sequence
-                for i in range(padDownstream):
-                        # Add an N to the sequence downstream
-                        sequence = sequence + "N"
-                sequencesFile.write(sequence + "\n")
-                numSequences = numSequences + 1
-                sequenceIDs.append(record.id.strip())
+            sequence = str(record.seq)
+            for i in range(padUpstream):
+                # Add an N to the sequence upstream
+                sequence = "N" + sequence
+            for i in range(padDownstream):
+                # Add an N to the sequence downstream
+                sequence = sequence + "N"
+            sequencesFile.write(sequence + "\n")
+            numSequences = numSequences + 1
+            sequenceIDs.append(record.id.strip())
         sequencesFile.close()
         return sequencesFileName, numSequences, sequenceIDs
 
